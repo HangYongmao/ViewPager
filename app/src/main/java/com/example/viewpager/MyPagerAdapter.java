@@ -9,9 +9,11 @@ import java.util.List;
 public class MyPagerAdapter extends PagerAdapter {
 
     private List<View> viewList;
+    private List<String> titleList;
 
-    public MyPagerAdapter(List<View> viewList) {
+    public MyPagerAdapter(List<View> viewList, List<String> titleList) {
         this.viewList = viewList;
+        this.titleList = titleList;
     }
 
     // 返回页卡的数量
@@ -37,5 +39,11 @@ public class MyPagerAdapter extends PagerAdapter {
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView(viewList.get(position));
+    }
+
+    // 设置ViewPager页卡的标题
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return titleList.get(position);
     }
 }

@@ -1,5 +1,7 @@
 package com.example.viewpager;
 
+import android.graphics.Color;
+import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
 
     private List<View> viewList;
     private ViewPager pager;
+    private PagerTabStrip pagerTabStrip;
+    private List<String> titleList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +33,26 @@ public class MainActivity extends AppCompatActivity {
         viewList.add(view3);
         viewList.add(view4);
 
+        // 为ViewPager页卡设置标题
+        titleList = new ArrayList<String>();
+        titleList.add("第一页");
+        titleList.add("第二页");
+        titleList.add("第三页");
+        titleList.add("第四页");
+
+        // PagerTabStrip设置一些属性
+        pagerTabStrip = (PagerTabStrip) findViewById(R.id.pagerTabStrip);
+        pagerTabStrip.setBackgroundColor(Color.YELLOW);
+        pagerTabStrip.setTextColor(Color.RED);
+        pagerTabStrip.setDrawFullUnderline(false);
+        pagerTabStrip.setTabIndicatorColor(Color.GREEN);
+
         // 初始化ViewPager
         pager = (ViewPager) findViewById(R.id.pager);
+
         // 创建PagerAdapter的适配器
-        MyPagerAdapter adapter = new MyPagerAdapter(viewList);
+        MyPagerAdapter adapter = new MyPagerAdapter(viewList, titleList);
+
         // ViewPager加载适配器
         pager.setAdapter(adapter);
     }
