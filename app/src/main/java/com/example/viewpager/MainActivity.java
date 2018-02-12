@@ -1,6 +1,8 @@
 package com.example.viewpager;
 
 import android.graphics.Color;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -10,12 +12,13 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FragmentActivity {
 
     private List<View> viewList;
     private ViewPager pager;
     private PagerTabStrip pagerTabStrip;
     private List<String> titleList;
+    private List<Fragment> fragmentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
         viewList.add(view2);
         viewList.add(view3);
         viewList.add(view4);
+
+        // 通过Fragment作为ViewPager的数据源
+        fragmentList = new ArrayList<Fragment>();
+        fragmentList.add(new Fragment1());
+        fragmentList.add(new Fragment2());
+        fragmentList.add(new Fragment3());
+        fragmentList.add(new Fragment4());
 
         // 为ViewPager页卡设置标题
         titleList = new ArrayList<String>();
@@ -54,6 +64,12 @@ public class MainActivity extends AppCompatActivity {
         MyPagerAdapter adapter = new MyPagerAdapter(viewList, titleList);
 
         // ViewPager加载适配器
-        pager.setAdapter(adapter);
+        //pager.setAdapter(adapter);
+
+        MyFragmentPagerAdapter adapter2 = new MyFragmentPagerAdapter(getSupportFragmentManager(), fragmentList, titleList);
+        //pager.setAdapter(adapter2);
+
+        MyFragmentPagerAdapter2 adapter3 = new MyFragmentPagerAdapter2(getSupportFragmentManager(), fragmentList, titleList);
+        pager.setAdapter(adapter3);
     }
 }
