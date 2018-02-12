@@ -8,11 +8,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements ViewPager.OnPageChangeListener {
 
     private List<View> viewList;
     private ViewPager pager;
@@ -71,5 +72,19 @@ public class MainActivity extends FragmentActivity {
 
         MyFragmentPagerAdapter2 adapter3 = new MyFragmentPagerAdapter2(getSupportFragmentManager(), fragmentList, titleList);
         pager.setAdapter(adapter3);
+        pager.addOnPageChangeListener(this);
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        Toast.makeText(this, "当前是第 " + (position + 1) + " 个页面", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
     }
 }
